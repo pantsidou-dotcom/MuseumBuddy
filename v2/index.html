@@ -1,1 +1,70 @@
+<!doctype html>
+<html lang="nl" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MuseumBuddy v2 — Ontdek musea met beeld</title>
+  <meta name="description" content="MuseumBuddy v2 — moderne, beeldrijke lijst van musea met zoeken en filters." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">MB</div>
+        <h1>MuseumBuddy <span class="tag">v2</span></h1>
+      </div>
+      <div class="actions">
+        <div class="lang" role="tablist" aria-label="Language">
+          <button id="lang-nl" class="active" role="tab" aria-selected="true">NL</button>
+          <button id="lang-en" role="tab" aria-selected="false">EN</button>
+        </div>
+        <button id="theme" class="theme-toggle" title="Toggle theme">🌓</button>
+      </div>
+    </header>
 
+    <section class="hero">
+      <div class="hero-inner">
+        <h2 class="hero-title">Ontdek musea in één oogopslag</h2>
+        <p class="hero-sub i-hero-sub">Filter op gratis, kindvriendelijk of tijdelijke exposities — en klik door naar de officiële site.</p>
+      </div>
+    </section>
+
+    <div class="controls" aria-label="Filters">
+      <input id="q" type="search" placeholder="Zoek op naam, stad of thema…" aria-label="Zoeken" />
+      <label class="chip">
+        <input id="f-free" type="checkbox" />
+        <span class="label i-free">Gratis</span>
+      </label>
+      <label class="chip">
+        <input id="f-kids" type="checkbox" />
+        <span class="label i-kids">Kindvriendelijk</span>
+      </label>
+      <label class="chip">
+        <input id="f-temp" type="checkbox" />
+        <span class="label i-temp">Tijdelijke exposities</span>
+      </label>
+      <select id="sort" aria-label="Sorteren">
+        <option value="relevance">Sorteren: Standaard</option>
+        <option value="name">A–Z</option>
+        <option value="city">Stad</option>
+        <option value="endingSoon">Eindigt binnenkort</option>
+      </select>
+    </div>
+
+    <main id="list" class="grid" role="list"></main>
+    <div id="empty" class="empty" hidden>
+      <span class="icon">🔍</span>
+      <div class="i-empty">Geen resultaten. Pas je zoekopdracht of filters aan.</div>
+    </div>
+
+    <footer>
+      <span class="i-foot">Beeldrijke demo • Alles lokaal in je browser • Geen tracking</span>
+      <a href="../">Terug naar v1</a>
+    </footer>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
