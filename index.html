@@ -7,202 +7,206 @@
   <meta name="description" content="MuseumBuddy mini demo met filters en tweetalige interface (NL/EN)." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  :root {
-    /* Light theme defaults */
-    --bg: #f7f7fb;
-    --text: #111827;
-    --muted: #6b7280;
+  /* Root variables (light) */
+  :root{
+    --bg:#f7f7fb;
+    --text:#111827;
+    --muted:#6b7280;
 
     /* Accent */
-    --accent: #4f46e5;      /* alternatief uit main: #2563eb */
-    --accent-ink: #ffffff;
+    --accent:#4f46e5;           /* alternatief eerder: #2563eb */
+    --accent-ink:#ffffff;
 
     /* Surfaces & borders */
-    --card: #ffffff;        /* primaire kaartkleur */
-    --card-bg: #ffffff;     /* fallback naam; beide blijven bestaan */
-    --border: #e5e7eb;
+    --card:#ffffff;              /* primair */
+    --card-bg:#ffffff;           /* alias/fallback */
+    --border:#e5e7eb;
 
     /* Chips */
-    --chip: #f3f4f6;
-    --chip-bg: #f3f4f6;
+    --chip:#f3f4f6;
+    --chip-bg:#f3f4f6;
 
-    /* Radius / spacing / shadow */
-    --radius: 16px;
-    --s-4: 4px;
-    --s-8: 8px;
-    --s-12: 12px;
-    --s-16: 16px;
-    --s-24: 24px;
-    --s-32: 32px;
-    --shadow: 0 2px 4px rgba(0,0,0,0.05);
+    /* Radii / spacing / shadow */
+    --radius:16px;
+    --s-4:4px; --s-6:6px; --s-8:8px; --s-12:12px; --s-16:16px; --s-24:24px; --s-32:32px;
+    --shadow:0 6px 20px rgba(0,0,0,0.12);
   }
 
-  /* Dark theme support (alle varianten meegenomen) */
-  [data-theme="dark"] {
-    --bg: #0b1020;
-    --card: #121933;
-    --card-bg: #121933;
-    --text: #e9ecf5;
-    --muted: #9aa4c1;
-    --accent: #7aa2ff;
-    --accent-ink: #0b1020;
-    --border: #243056;
-    --chip: #1b2338;
-    --chip-bg: #1b2338;
-    --shadow: 0 2px 4px rgba(0,0,0,0.4);
+  /* Dark theme */
+  [data-theme="dark"]{
+    --bg:#0b1020;
+    --card:#121933;
+    --card-bg:#121933;
+    --text:#e9ecf5;
+    --muted:#9aa4c1;
+    --accent:#7aa2ff;
+    --accent-ink:#0b1020;
+    --border:#243056;
+    --chip:#1b2338;
+    --chip-bg:#1b2338;
+    --shadow:0 6px 20px rgba(0,0,0,0.25);
   }
 
-  * { box-sizing: border-box; }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.55;
+  /* Base */
+  *{box-sizing:border-box}
+  html,body{
+    margin:0; padding:0;
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--text);
+    font-size:16px; line-height:1.55;
+  }
+  a{ color:inherit; text-decoration:none; }
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
   }
 
-  a { color: var(--accent); text-decoration: none; }
+  /* Layout */
+  .wrap{ max-width:1000px; margin:0 auto; padding:var(--s-24) var(--s-16) var(--s-32); }
+  .grid{ display:grid; gap:var(--s-16); }
+  @media (min-width:720px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px){ .grid{ grid-template-columns:repeat(3,1fr); } }
 
-  .wrap {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: var(--s-24) var(--s-16) var(--s-32);
+  /* Header */
+  header{
+    position:sticky; top:0; backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:var(--s-16);
+    padding-bottom:var(--s-16); margin-bottom:var(--s-24);
+  }
+  .brand{ display:flex; align-items:center; gap:var(--s-8); }
+  .actions{ display:flex; align-items:center; gap:var(--s-8); }
+  .logo{
+    width:40px; height:40px; border-radius:var(--radius);
+    background:linear-gradient(135deg, var(--accent), #9bffd1);
+    display:grid; place-items:center; color:var(--accent-ink); font-weight:700;
+  }
+  h1{ font-size:1.375rem; font-weight:600; margin:0; }
+
+  /* Controls */
+  .controls{ display:grid; grid-template-columns:1fr; gap:var(--s-8); margin-bottom:var(--s-24); }
+  @media (min-width:720px){ .controls{ grid-template-columns:1.5fr 1fr auto auto auto; } }
+
+  input[type="search"], select{
+    width:100%; min-height:40px;
+    padding:0 var(--s-12);
+    border-radius:12px; border:1px solid var(--border);
+    background:var(--chip, var(--chip-bg)); color:var(--text);
+    transition: box-shadow .2s, border-color .2s;
+  }
+  input[type="search"]::placeholder{ color:var(--muted); }
+  input[type="search"]:focus-visible, select:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px; box-shadow:0 0 0 2px var(--accent);
+  }
+  select{
+    appearance:none;
+    background-image:url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%236b7280"%3e%3cpath fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.657a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/%3e%3c/svg%3e');
+    background-repeat:no-repeat; background-position:right var(--s-12) center; padding-right:var(--s-32);
   }
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-16);
-    margin-bottom: var(--s-24);
+  /* Chips */
+  .chip{ position:relative; display:inline-flex; }
+  .chip input{ position:absolute; opacity:0; }
+  .chip .label{
+    display:inline-flex; align-items:center; gap:var(--s-4);
+    padding:0 var(--s-12);
+    border-radius:999px; border:1px solid var(--border);
+    background:transparent; color:var(--text);
+    min-height:40px; cursor:pointer;
+    transition: background .15s, border-color .15s, color .15s;
   }
+  .chip .label:hover{ background:var(--chip-bg); }
+  .chip input:checked + .label{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .chip input:focus-visible + .label{ outline:2px solid var(--accent); outline-offset:2px; }
+  .i-free::before{ content:"🆓"; }
+  .i-kids::before{ content:"👶"; }
+  .i-temp::before{ content:"⏳"; }
 
-  .brand { display: flex; align-items: center; gap: var(--s-8); }
-  .actions { display: flex; align-items: center; gap: var(--s-8); }
-
-  .logo {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius);
-    background: linear-gradient(135deg, var(--accent), #9bffd1);
-    display: grid;
-    place-items: center;
-    color: var(--accent-ink);
-    font-weight: 700;
+  /* Language & theme */
+  .lang{
+    display:inline-flex; gap:var(--s-4);
+    background:var(--chip, var(--chip-bg));
+    border:1px solid var(--border); border-radius:var(--radius); padding:var(--s-4);
   }
-
-  h1 { font-size: 1.375rem; font-weight: 600; margin: 0; }
-
-  .controls { display: grid; grid-template-columns: 1fr; gap: var(--s-12); }
-  @media (min-width: 720px) {
-    .controls { grid-template-columns: 1.2fr 1fr auto auto; }
+  .lang button{
+    border:0; background:transparent; color:var(--muted);
+    padding:0 var(--s-12); border-radius:var(--s-8); cursor:pointer;
+    min-width:40px; min-height:40px; transition: background .15s, color .15s;
   }
+  .lang button:hover{ background:var(--chip, var(--chip-bg)); }
+  .lang button.active{ background:var(--accent); color:var(--accent-ink); }
+  .lang button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-  input[type="search"] {
-    width: 100%;
-    padding: 0 var(--s-12);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--chip, var(--chip-bg));
-    min-height: 40px;
+  .theme-toggle{
+    border:1px solid var(--border); background:var(--chip, var(--chip-bg));
+    border-radius:var(--radius); cursor:pointer; min-width:40px; min-height:40px;
   }
+  .theme-toggle:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-8);
-    padding: 0 var(--s-12);
-    border-radius: 999px;
-    background: var(--chip, var(--chip-bg));
-    border: 1px solid var(--border);
-    color: var(--text);
-    min-height: 40px;
+  /* Cards */
+  .card{
+    background:var(--card, var(--card-bg, #121933));
+    border:1px solid var(--border); border-radius:var(--radius,14px);
+    padding:var(--s-16,14px);
+    display:grid; gap:var(--s-8,10px);
+    box-shadow:var(--shadow, none);
+    color:var(--text, inherit);
+    transition: transform .2s, box-shadow .2s; cursor:pointer;
   }
+  .card:hover{ transform:translateY(-1px); }
+  .card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-  .chip input { accent-color: var(--accent); }
+  .title-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:var(--s-8); }
+  .title{ font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:var(--s-4); }
+  .title::after{ content:"↗"; font-size:.75rem; opacity:.6; }
 
-  .lang {
-    display: inline-flex;
-    gap: var(--s-4);
-    background: var(--chip, var(--chip-bg));
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: var(--s-4);
+  .fav{
+    border:0; background:none; color:var(--muted);
+    font-size:1.125rem; line-height:1; cursor:pointer;
+    transition: transform .15s, color .15s;
   }
+  .fav:hover{ transform:scale(1.06); color:var(--accent); }
+  .fav.active{ color:var(--accent); }
+  .fav:focus-visible{ outline:2px solid var(--accent); border-radius:50%; outline-offset:2px; }
 
-  .lang button {
-    border: 0;
-    background: transparent;
-    color: var(--muted);
-    padding: 0 var(--s-12);
-    border-radius: var(--s-8);
-    cursor: pointer;
-    min-width: 40px;
-    min-height: 40px;
+  .badges{ display:flex; flex-wrap:wrap; gap:var(--s-4); }
+
+  /* Badges */
+  .badge{
+    display:inline-flex; align-items:center; gap:var(--s-4);
+    font-size:.75rem; padding:var(--s-4) var(--s-6);
+    border:1px solid var(--border); border-radius:999px;
+    background:var(--chip, var(--chip-bg)); color:var(--muted);
   }
+  .badge::before{ font-size:.8em; }
+  .badge.free::before{ content:"🆓"; }
+  .badge.kids::before{ content:"👧"; }
+  .badge.temp::before{ content:"⏳"; }
+  .badge.now::before{ content:"⭐"; }
+  .badge.end::before{ content:"⚠️"; }
+  .badge.access::before{ content:"♿"; }
+  .badge.end{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
 
-  .lang button.active { background: var(--accent); color: var(--accent-ink); }
-
-  .theme-toggle {
-    border: 0;
-    background: var(--chip, var(--chip-bg));
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    cursor: pointer;
-    min-width: 40px;
-    min-height: 40px;
-    color: var(--text);
+  /* Empty & skeleton */
+  .empty{
+    color:var(--muted); padding:var(--s-16); text-align:center;
+    border:1px dashed var(--border); border-radius:var(--radius);
+    background:var(--card, var(--card-bg));
   }
+  .empty .icon{ font-size:2rem; display:block; margin-bottom:var(--s-8); }
 
-  .grid { display: grid; grid-template-columns: 1fr; gap: var(--s-16); margin-top: var(--s-24); }
-  @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1024px){ .grid { grid-template-columns: repeat(3, 1fr); } }
-
-  /* Cards + typografie + badges (unified, met fallbacks) */
-  .card {
-    background: var(--card, var(--card-bg, #121933));
-    border: 1px solid var(--border);
-    border-radius: var(--radius, 14px);
-    padding: var(--s-16, 14px);
-    display: grid;
-    gap: var(--s-8, 10px);
-    box-shadow: var(--shadow, none);
-    color: var(--text, inherit);
-    transition: box-shadow .2s, transform .06s;
-    cursor: pointer;
+  .skeleton{
+    height:160px; border-radius:var(--radius);
+    background:linear-gradient(90deg, var(--chip, var(--chip-bg)) 25%, var(--border) 37%, var(--chip, var(--chip-bg)) 63%);
+    background-size:400% 100%; animation:skeleton 1.2s ease-in-out infinite;
   }
-  .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); transform: translateY(-1px); }
+  @keyframes skeleton{ from{ background-position:100% 0; } to{ background-position:0 0; } }
 
-  .title { font-weight: 600; color: var(--accent); }
-
-  .badges { display: flex; flex-wrap: wrap; gap: var(--s-8, 6px); }
-  .badge {
-    font-size: 12px;
-    padding: var(--s-4, 4px) var(--s-8, 8px);
-    background: var(--chip, var(--chip-bg, rgba(0,0,0,0.06)));
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--muted);
+  /* Footer */
+  footer{
+    margin-top:var(--s-32); color:var(--muted); font-size:.75rem;
+    text-align:center; display:flex; justify-content:center; gap:var(--s-8);
   }
-
-  .empty {
-    color: var(--muted);
-    padding: var(--s-16, 16px);
-    text-align: center;
-    border: 1px dashed var(--border);
-    border-radius: var(--radius, 12px);
-    background: var(--card, var(--card-bg, rgba(0,0,0,0.1)));
-  }
-
-  footer {
-    margin-top: var(--s-32, 18px);
-    color: var(--muted);
-    font-size: 12px;
-    text-align: center;
-  }
+  footer a{ color:var(--accent); }
 </style>
   </style>
 </head>
@@ -224,16 +228,34 @@
 
     <div class="controls" aria-label="Filters">
       <input id="q" type="search" placeholder="Zoek op naam, stad of thema…" aria-label="Zoeken" />
-      <label class="chip"><input id="f-free" type="checkbox" /> <span class="i-free">Gratis</span></label>
-      <label class="chip"><input id="f-kids" type="checkbox" /> <span class="i-kids">Kindvriendelijk</span></label>
-      <label class="chip"><input id="f-temp" type="checkbox" /> <span class="i-temp">Tijdelijke exposities</span></label>
+      <select id="sort" aria-label="Sorteren">
+        <option value="name">Naam (A-Z)</option>
+        <option value="city">Stad</option>
+      </select>
+      <label class="chip">
+        <input id="f-free" type="checkbox" />
+        <span class="label i-free">Gratis</span>
+      </label>
+      <label class="chip">
+        <input id="f-kids" type="checkbox" />
+        <span class="label i-kids">Kindvriendelijk</span>
+      </label>
+      <label class="chip">
+        <input id="f-temp" type="checkbox" />
+        <span class="label i-temp">Tijdelijke exposities</span>
+      </label>
     </div>
 
-    <div id="list" class="grid" role="list"></div>
-    <div id="empty" class="empty" hidden>Geen resultaten. Pas je zoekopdracht of filters aan.</div>
+    <div id="list" class="grid" role="list" aria-busy="true"></div>
+    <div id="empty" class="empty" hidden>
+      <span class="icon">🔍</span>
+      <p><span class="i-empty">Geen resultaten. Pas je zoekopdracht of filters aan.</span> <button id="reset" type="button">Reset filters</button></p>
+    </div>
 
     <footer>
       <span class="i-foot">Mini demo • Alles lokaal in je browser • Geen tracking</span>
+      <a href="#">Over</a>
+      <a href="#">Privacy</a>
     </footer>
   </div>
 
@@ -276,9 +298,11 @@
     const list = $("#list");
     const empty = $("#empty");
     const q = $("#q");
+    const sort = $("#sort");
     const fFree = $("#f-free");
     const fKids = $("#f-kids");
     const fTemp = $("#f-temp");
+    const reset = $("#reset");
     const langNL = $("#lang-nl");
     const langEN = $("#lang-en");
     const themeToggle = $("#theme-toggle");
@@ -300,6 +324,7 @@
       $(".i-kids").textContent = T[lang].kids;
       $(".i-temp").textContent = T[lang].temp;
       $(".i-foot").textContent = T[lang].foot;
+      $(".i-empty").textContent = T[lang].nores;
       render();
     }
 
@@ -329,12 +354,14 @@
       if (fFree.checked) out = out.filter(it => it.free);
       if (fKids.checked) out = out.filter(it => it.kids);
       if (fTemp.checked) out = out.filter(it => it.temporary);
+      const key = sort.value;
+      out = out.slice().sort((a,b) => a[key].localeCompare(b[key]));
       return out;
     }
 
-    function badge(label) {
+    function badge(label, cls) {
       const el = document.createElement("span");
-      el.className = "badge";
+      el.className = "badge " + cls;
       el.textContent = label;
       return el;
     }
@@ -343,11 +370,12 @@
       const items = applyFilters(DATA);
       list.innerHTML = "";
       if (!items.length) {
-        empty.textContent = T[lang].nores;
+        list.setAttribute("aria-busy", "false");
         empty.hidden = false;
         return;
       }
       empty.hidden = true;
+      list.removeAttribute("aria-busy");
       for (const m of items) {
         const card = document.createElement("a");
         card.className = "card";
@@ -355,10 +383,24 @@
         card.href = m.url;
         card.target = "_blank";
         card.rel = "noopener noreferrer";
-
-        const title = document.createElement("div");
+        const title = document.createElement("span");
         title.className = "title";
         title.textContent = m.name;
+
+        const fav = document.createElement("button");
+        fav.className = "fav";
+        fav.setAttribute("aria-pressed", "false");
+        fav.setAttribute("aria-label", "Voeg toe aan favorieten");
+        fav.textContent = "♡";
+        fav.addEventListener("click", e => {
+          e.preventDefault();
+          const active = fav.classList.toggle("active");
+          fav.textContent = active ? "❤" : "♡";
+          fav.setAttribute("aria-pressed", active);
+        });
+
+        row.appendChild(title);
+        row.appendChild(fav);
 
         const meta = document.createElement("div");
         meta.style.color = "var(--muted)";
@@ -366,11 +408,11 @@
 
         const badges = document.createElement("div");
         badges.className = "badges";
-        if (m.free)  badges.appendChild(badge(T[lang].free));
-        if (m.kids)  badges.appendChild(badge(T[lang].kids));
-        if (m.temporary) badges.appendChild(badge(T[lang].temp));
+        if (m.free)  badges.appendChild(badge(T[lang].free, "free"));
+        if (m.kids)  badges.appendChild(badge(T[lang].kids, "kids"));
+        if (m.temporary) badges.appendChild(badge(T[lang].temp, "temp"));
 
-        card.appendChild(title);
+        card.appendChild(row);
         card.appendChild(meta);
         card.appendChild(badges);
         list.appendChild(card);
@@ -378,11 +420,28 @@
     }
 
     q.addEventListener("input", render);
+    sort.addEventListener("change", render);
     fFree.addEventListener("change", render);
     fKids.addEventListener("change", render);
     fTemp.addEventListener("change", render);
+    reset.addEventListener("click", () => {
+      q.value = "";
+      sort.value = "name";
+      fFree.checked = fKids.checked = fTemp.checked = false;
+      render();
+    });
 
-    setLang(lang);
+    function showSkeleton() {
+      list.innerHTML = "";
+      for (let i = 0; i < 6; i++) {
+        const sk = document.createElement("div");
+        sk.className = "skeleton";
+        list.appendChild(sk);
+      }
+    }
+
+    showSkeleton();
+    setTimeout(() => setLang(lang), 300);
   </script>
 </body>
 </html>
