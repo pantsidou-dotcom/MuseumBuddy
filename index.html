@@ -383,6 +383,10 @@
         card.href = m.url;
         card.target = "_blank";
         card.rel = "noopener noreferrer";
+
+        const row = document.createElement("div");
+        row.className = "title-row";
+
         const title = document.createElement("span");
         title.className = "title";
         title.textContent = m.name;
