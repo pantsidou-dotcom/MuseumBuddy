@@ -272,7 +272,15 @@ function render() {
     img.src = m.img;
     img.alt = m.name;
     img.className = "photo";
-    img.onerror = () => { img.src = placeholder(m.name); };
+const img = document.createElement("img");
+img.src = m.photo;                 // of welke property je gebruikt
+img.alt = `${m.name} — ${m.city}`;
+img.loading = "lazy";
+// Fallback: als de foto niet laadt, toon een placeholder
+img.onerror = () => {
+  img.onerror = null;              // voorkom loop als placeholder faalt
+  img.src = placeholder(m.name);
+};
 
     const row = document.createElement("div");
     row.className = "title-row";
@@ -343,3 +351,15 @@ function showSkeleton() {
 showSkeleton();
 setTimeout(() => setLang(lang), 300);
 
+function placeholder(name = "Museum") {
+  const bg = "#e5e7eb";  // lichtgrijze achtergrond
+  const fg = "#6b7280";  // grijze tekst
+  const text = encodeURIComponent(name);
+  // Lichtgewicht inline SVG als data-URL, geen externe service nodig
+  return `data:image/svg+xml;utf8,` +
+    `<svg xmlns='http://www.w3.org/2000/svg' width='640' height='360'>` +
+    `<rect width='100%' height='100%' fill='${bg}'/>` +
+    `<text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' ` +
+    `font-family='Inter, system-ui, sans-serif' font-size='28' fill='${fg}'>${text}</text>` +
+    `</svg>`;
+}
