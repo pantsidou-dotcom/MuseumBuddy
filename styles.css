@@ -152,6 +152,17 @@
   .card:hover{ transform:translateY(-1px); }
   .card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
+  .card .photo{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:var(--s-8);
+  }
+
+  .card .desc{
+    margin:0;
+  }
+
   .title-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:var(--s-8); }
   .title{ font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:var(--s-4); }
   .title::after{ content:"↗"; font-size:.75rem; opacity:.6; }
