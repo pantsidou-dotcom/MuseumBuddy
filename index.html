@@ -1,52 +1,170 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MuseumBuddy — Mini Demo</title>
   <meta name="description" content="MuseumBuddy mini demo met filters en tweetalige interface (NL/EN)." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #4f46e5;
+      --accent-ink: #ffffff;
+      --border: #e5e7eb;
+      --chip: #f3f4f6;
+      --shadow: 0 2px 4px rgba(0,0,0,0.05);
+      --radius: 16px;
+      --s-4: 4px;
+      --s-8: 8px;
+      --s-12: 12px;
+      --s-16: 16px;
+      --s-24: 24px;
+      --s-32: 32px;
+    }
+    [data-theme="dark"] {
       --bg: #0b1020;
       --card: #121933;
-      --ink: #e9ecf5;
-      --muted: #a8b1c7;
+      --text: #e9ecf5;
+      --muted: #9aa4c1;
       --accent: #7aa2ff;
       --accent-ink: #0b1020;
-      --chip: #1a2347;
       --border: #243056;
+      --chip: #1b2338;
+      --shadow: 0 2px 4px rgba(0,0,0,0.4);
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--ink); }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.55;
+    }
     a { color: var(--accent); text-decoration: none; }
-    .wrap { max-width: 980px; margin: 32px auto; padding: 0 16px; }
-    header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-    .brand { display: flex; align-items: center; gap: 10px; }
-    .logo { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #7aa2ff, #9bffd1); display: grid; place-items: center; color: #0b1020; font-weight: 800; }
-    h1 { font-size: 20px; margin: 0; }
-    .controls { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: var(--s-24) var(--s-16) var(--s-32); }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-16);
+      margin-bottom: var(--s-24);
+    }
+    .brand { display: flex; align-items: center; gap: var(--s-8); }
+    .actions { display: flex; align-items: center; gap: var(--s-8); }
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--accent), #9bffd1);
+      display: grid;
+      place-items: center;
+      color: var(--accent-ink);
+      font-weight: 700;
+    }
+    h1 { font-size: 1.375rem; font-weight: 600; margin: 0; }
+    .controls { display: grid; grid-template-columns: 1fr; gap: var(--s-12); }
     @media (min-width: 720px) {
       .controls { grid-template-columns: 1.2fr 1fr auto auto; }
     }
-    input[type="search"] { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--chip); color: var(--ink); }
-    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 999px; background: var(--chip); border: 1px solid var(--border); color: var(--ink); }
+    input[type="search"] {
+      width: 100%;
+      padding: 0 var(--s-12);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--chip);
+      min-height: 40px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-8);
+      padding: 0 var(--s-12);
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--border);
+      color: var(--text);
+      min-height: 40px;
+    }
     .chip input { accent-color: var(--accent); }
-    .lang { display: inline-flex; gap: 6px; background: var(--chip); border: 1px solid var(--border); border-radius: 12px; padding: 4px; }
-    .lang button { border: 0; background: transparent; color: var(--muted); padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+    .lang {
+      display: inline-flex;
+      gap: var(--s-4);
+      background: var(--chip);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--s-4);
+    }
+    .lang button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 0 var(--s-12);
+      border-radius: var(--s-8);
+      cursor: pointer;
+      min-width: 40px;
+      min-height: 40px;
+    }
     .lang button.active { background: var(--accent); color: var(--accent-ink); }
-    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+    .theme-toggle {
+      border: 0;
+      background: var(--chip);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      min-width: 40px;
+      min-height: 40px;
+      color: var(--text);
+    }
+    .grid { display: grid; grid-template-columns: 1fr; gap: var(--s-16); margin-top: var(--s-24); }
     @media (min-width: 720px) {
       .grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 1024px) {
       .grid { grid-template-columns: repeat(3, 1fr); }
     }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: grid; gap: 10px; }
-    .title { font-weight: 650; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; }
-    .badge { font-size: 12px; padding: 4px 8px; background: var(--chip); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); }
-    .empty { color: var(--muted); padding: 16px; text-align: center; border: 1px dashed var(--border); border-radius: 12px; background: rgba(0,0,0,0.1) }
-    footer { margin-top: 18px; color: var(--muted); font-size: 12px; text-align: center; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--s-16);
+      display: grid;
+      gap: var(--s-8);
+      box-shadow: var(--shadow);
+      color: inherit;
+      transition: box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .title { font-weight: 600; font-size: 1.25rem; color: var(--accent); }
+    .badges { display: flex; flex-wrap: wrap; gap: var(--s-8); }
+    .badge {
+      font-size: 0.75rem;
+      padding: var(--s-4) var(--s-8);
+      background: var(--chip);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+    }
+    .empty {
+      color: var(--muted);
+      padding: var(--s-16);
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+    footer {
+      margin-top: var(--s-32);
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -56,9 +174,12 @@
         <div class="logo">MB</div>
         <h1>MuseumBuddy</h1>
       </div>
-      <div class="lang" role="tablist" aria-label="Language">
-        <button id="lang-nl" class="active" role="tab" aria-selected="true">NL</button>
-        <button id="lang-en" role="tab" aria-selected="false">EN</button>
+      <div class="actions">
+        <div class="lang" role="tablist" aria-label="Language">
+          <button id="lang-nl" class="active" role="tab" aria-selected="true">NL</button>
+          <button id="lang-en" role="tab" aria-selected="false">EN</button>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Wissel thema">🌙</button>
       </div>
     </header>
 
@@ -79,18 +200,18 @@
 
   <script>
     const DATA = [
-      { id: 1, name: "Rijksmuseum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst & Geschiedenis" },
-      { id: 2, name: "Van Gogh Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst" },
-      { id: 3, name: "NEMO Science Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Wetenschap" },
-      { id: 4, name: "Kunsthal", city: "Rotterdam", free: false, kids: true, temporary: true, theme: "Hedendaagse kunst" },
-      { id: 5, name: "Boijmans Depot", city: "Rotterdam", free: false, kids: false, temporary: false, theme: "Collectie" },
-      { id: 6, name: "Mauritshuis", city: "Den Haag", free: false, kids: true, temporary: true, theme: "Schilderkunst" },
-      { id: 7, name: "Frans Hals Museum", city: "Haarlem", free: false, kids: true, temporary: true, theme: "Schilderkunst" },
-      { id: 8, name: "Museum Ons' Lieve Heer op Solder", city: "Amsterdam", free: false, kids: true, temporary: false, theme: "Historie" },
-      { id: 9, name: "Het Spoorwegmuseum", city: "Utrecht", free: false, kids: true, temporary: true, theme: "Techniek & Historie" },
-      { id:10, name: "Stedelijk Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Moderne kunst" },
-      { id:11, name: "Museum Arnhem", city: "Arnhem", free: false, kids: true, temporary: true, theme: "Kunst" },
-      { id:12, name: "Allard Pierson", city: "Amsterdam", free: true, kids: true, temporary: true, theme: "Erfgoed" }
+      { id: 1, name: "Rijksmuseum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst & Geschiedenis", url: "https://www.rijksmuseum.nl/" },
+      { id: 2, name: "Van Gogh Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst", url: "https://www.vangoghmuseum.nl/" },
+      { id: 3, name: "NEMO Science Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Wetenschap", url: "https://www.nemosciencemuseum.nl/" },
+      { id: 4, name: "Kunsthal", city: "Rotterdam", free: false, kids: true, temporary: true, theme: "Hedendaagse kunst", url: "https://www.kunsthal.nl/" },
+      { id: 5, name: "Boijmans Depot", city: "Rotterdam", free: false, kids: false, temporary: false, theme: "Collectie", url: "https://www.boijmans.nl/depot/" },
+      { id: 6, name: "Mauritshuis", city: "Den Haag", free: false, kids: true, temporary: true, theme: "Schilderkunst", url: "https://www.mauritshuis.nl/" },
+      { id: 7, name: "Frans Hals Museum", city: "Haarlem", free: false, kids: true, temporary: true, theme: "Schilderkunst", url: "https://www.franshalsmuseum.nl/" },
+      { id: 8, name: "Museum Ons' Lieve Heer op Solder", city: "Amsterdam", free: false, kids: true, temporary: false, theme: "Historie", url: "https://www.opsolder.nl/" },
+      { id: 9, name: "Het Spoorwegmuseum", city: "Utrecht", free: false, kids: true, temporary: true, theme: "Techniek & Historie", url: "https://www.spoorwegmuseum.nl/" },
+      { id:10, name: "Stedelijk Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Moderne kunst", url: "https://www.stedelijk.nl/" },
+      { id:11, name: "Museum Arnhem", city: "Arnhem", free: false, kids: true, temporary: true, theme: "Kunst", url: "https://www.museumarnhem.nl/" },
+      { id:12, name: "Allard Pierson", city: "Amsterdam", free: true, kids: true, temporary: true, theme: "Erfgoed", url: "https://www.allardpierson.nl/" }
     ];
 
     const T = {
@@ -121,9 +242,12 @@
     const fTemp = $("#f-temp");
     const langNL = $("#lang-nl");
     const langEN = $("#lang-en");
+    const themeToggle = $("#theme-toggle");
 
     const KEY = "museumbuddy.lang.v1";
     let lang = (localStorage.getItem(KEY) || "nl");
+    const THEME_KEY = "museumbuddy.theme.v1";
+    let theme = localStorage.getItem(THEME_KEY) || "light";
 
     function setLang(next) {
       lang = next;
@@ -142,6 +266,17 @@
 
     langNL.addEventListener("click", () => setLang("nl"));
     langEN.addEventListener("click", () => setLang("en"));
+
+    function applyTheme() {
+      document.documentElement.setAttribute("data-theme", theme);
+      themeToggle.textContent = theme === "light" ? "🌙" : "☀️";
+    }
+    themeToggle.addEventListener("click", () => {
+      theme = theme === "light" ? "dark" : "light";
+      localStorage.setItem(THEME_KEY, theme);
+      applyTheme();
+    });
+    applyTheme();
 
     function matches(item, txt) {
       const s = (item.name + " " + item.city + " " + item.theme).toLowerCase();
@@ -175,9 +310,12 @@
       }
       empty.hidden = true;
       for (const m of items) {
-        const card = document.createElement("article");
+        const card = document.createElement("a");
         card.className = "card";
         card.setAttribute("role", "listitem");
+        card.href = m.url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
 
         const title = document.createElement("div");
         title.className = "title";
