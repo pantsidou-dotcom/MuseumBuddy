@@ -41,8 +41,8 @@
     @media (min-width: 1024px) {
       .grid { grid-template-columns: repeat(3, 1fr); }
     }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: grid; gap: 10px; }
-    .title { font-weight: 650; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: grid; gap: 10px; color: var(--ink); cursor: pointer; }
+    .title { font-weight: 650; color: var(--accent); }
     .badges { display: flex; flex-wrap: wrap; gap: 6px; }
     .badge { font-size: 12px; padding: 4px 8px; background: var(--chip); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); }
     .empty { color: var(--muted); padding: 16px; text-align: center; border: 1px dashed var(--border); border-radius: 12px; background: rgba(0,0,0,0.1) }
@@ -175,9 +175,12 @@
       }
       empty.hidden = true;
       for (const m of items) {
-        const card = document.createElement("article");
+        const card = document.createElement("a");
         card.className = "card";
         card.setAttribute("role", "listitem");
+        card.href = m.url;
+        card.target = "_blank";
+        card.rel = "noopener";
 
         const title = document.createElement("a");
         title.className = "title";
