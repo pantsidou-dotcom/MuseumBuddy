@@ -41,8 +41,8 @@
     @media (min-width: 1024px) {
       .grid { grid-template-columns: repeat(3, 1fr); }
     }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: grid; gap: 10px; }
-    .title { font-weight: 650; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: grid; gap: 10px; color: var(--ink); cursor: pointer; }
+    .title { font-weight: 650; color: var(--accent); }
     .badges { display: flex; flex-wrap: wrap; gap: 6px; }
     .badge { font-size: 12px; padding: 4px 8px; background: var(--chip); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); }
     .empty { color: var(--muted); padding: 16px; text-align: center; border: 1px dashed var(--border); border-radius: 12px; background: rgba(0,0,0,0.1) }
@@ -79,18 +79,18 @@
 
   <script>
     const DATA = [
-      { id: 1, name: "Rijksmuseum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst & Geschiedenis" },
-      { id: 2, name: "Van Gogh Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst" },
-      { id: 3, name: "NEMO Science Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Wetenschap" },
-      { id: 4, name: "Kunsthal", city: "Rotterdam", free: false, kids: true, temporary: true, theme: "Hedendaagse kunst" },
-      { id: 5, name: "Boijmans Depot", city: "Rotterdam", free: false, kids: false, temporary: false, theme: "Collectie" },
-      { id: 6, name: "Mauritshuis", city: "Den Haag", free: false, kids: true, temporary: true, theme: "Schilderkunst" },
-      { id: 7, name: "Frans Hals Museum", city: "Haarlem", free: false, kids: true, temporary: true, theme: "Schilderkunst" },
-      { id: 8, name: "Museum Ons' Lieve Heer op Solder", city: "Amsterdam", free: false, kids: true, temporary: false, theme: "Historie" },
-      { id: 9, name: "Het Spoorwegmuseum", city: "Utrecht", free: false, kids: true, temporary: true, theme: "Techniek & Historie" },
-      { id:10, name: "Stedelijk Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Moderne kunst" },
-      { id:11, name: "Museum Arnhem", city: "Arnhem", free: false, kids: true, temporary: true, theme: "Kunst" },
-      { id:12, name: "Allard Pierson", city: "Amsterdam", free: true, kids: true, temporary: true, theme: "Erfgoed" }
+      { id: 1, name: "Rijksmuseum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst & Geschiedenis", url: "https://www.rijksmuseum.nl/" },
+      { id: 2, name: "Van Gogh Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Kunst", url: "https://www.vangoghmuseum.nl/" },
+      { id: 3, name: "NEMO Science Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Wetenschap", url: "https://www.nemosciencemuseum.nl/" },
+      { id: 4, name: "Kunsthal", city: "Rotterdam", free: false, kids: true, temporary: true, theme: "Hedendaagse kunst", url: "https://www.kunsthal.nl/" },
+      { id: 5, name: "Boijmans Depot", city: "Rotterdam", free: false, kids: false, temporary: false, theme: "Collectie", url: "https://www.boijmans.nl/depot/" },
+      { id: 6, name: "Mauritshuis", city: "Den Haag", free: false, kids: true, temporary: true, theme: "Schilderkunst", url: "https://www.mauritshuis.nl/" },
+      { id: 7, name: "Frans Hals Museum", city: "Haarlem", free: false, kids: true, temporary: true, theme: "Schilderkunst", url: "https://www.franshalsmuseum.nl/" },
+      { id: 8, name: "Museum Ons' Lieve Heer op Solder", city: "Amsterdam", free: false, kids: true, temporary: false, theme: "Historie", url: "https://www.opsolder.nl/" },
+      { id: 9, name: "Het Spoorwegmuseum", city: "Utrecht", free: false, kids: true, temporary: true, theme: "Techniek & Historie", url: "https://www.spoorwegmuseum.nl/" },
+      { id:10, name: "Stedelijk Museum", city: "Amsterdam", free: false, kids: true, temporary: true, theme: "Moderne kunst", url: "https://www.stedelijk.nl/" },
+      { id:11, name: "Museum Arnhem", city: "Arnhem", free: false, kids: true, temporary: true, theme: "Kunst", url: "https://www.museumarnhem.nl/" },
+      { id:12, name: "Allard Pierson", city: "Amsterdam", free: true, kids: true, temporary: true, theme: "Erfgoed", url: "https://www.allardpierson.nl/" }
     ];
 
     const T = {
@@ -175,9 +175,12 @@
       }
       empty.hidden = true;
       for (const m of items) {
-        const card = document.createElement("article");
+        const card = document.createElement("a");
         card.className = "card";
         card.setAttribute("role", "listitem");
+        card.href = m.url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
 
         const title = document.createElement("div");
         title.className = "title";
