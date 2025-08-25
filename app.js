@@ -44,6 +44,7 @@ const reset = $("#reset");
 const langNL = $("#lang-nl");
 const langEN = $("#lang-en");
 const themeToggle = $("#theme-toggle");
+const themeIcon = themeToggle.querySelector("svg");
 
 const KEY = "museumbuddy.lang.v1";
 let lang = (localStorage.getItem(KEY) || "nl");
@@ -71,7 +72,13 @@ langEN.addEventListener("click", () => setLang("en"));
 
 function applyTheme() {
   document.documentElement.setAttribute("data-theme", theme);
-  themeToggle.textContent = theme === "light" ? "🌙" : "☀️";
+  let use = themeIcon.querySelector("use");
+  if (!use) {
+    use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    themeIcon.appendChild(use);
+  }
+  const href = theme === "light" ? "./icons/moon.svg#moon" : "./icons/sun.svg#sun";
+  use.setAttribute("href", href);
 }
 themeToggle.addEventListener("click", () => {
   theme = theme === "light" ? "dark" : "light";
