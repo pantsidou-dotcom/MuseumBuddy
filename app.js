@@ -269,6 +269,7 @@ function render() {
     card.target = "_blank";
     card.rel = "noopener noreferrer";
     const img = document.createElement("img");
+codex/add-photo-and-description-to-museums-r2ej9l
     img.loading = "lazy";
     img.src = m.img || placeholder(m.name);
     img.alt = m.name;
@@ -277,6 +278,11 @@ function render() {
       img.onerror = null;
       img.src = placeholder(m.name);
     };
+
+    img.src = m.img;
+    img.alt = m.name;
+    img.className = "photo";
+ main
 
     const row = document.createElement("div");
     row.className = "title-row";
