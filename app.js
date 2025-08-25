@@ -243,6 +243,14 @@ function badge(label, cls) {
   return el;
 }
 
+function placeholder(name) {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 160'>` +
+              `<rect width='400' height='160' fill='#d1d5db'/>` +
+              `<text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'` +
+              ` font-family='sans-serif' font-size='20' fill='#6b7280'>${name}</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
 function render() {
   const items = applyFilters(DATA);
   list.innerHTML = "";
@@ -261,9 +269,20 @@ function render() {
     card.target = "_blank";
     card.rel = "noopener noreferrer";
     const img = document.createElement("img");
+codex/add-photo-and-description-to-museums-r2ej9l
+    img.loading = "lazy";
+    img.src = m.img || placeholder(m.name);
+    img.alt = m.name;
+    img.className = "photo";
+    img.onerror = () => {
+      img.onerror = null;
+      img.src = placeholder(m.name);
+    };
+
     img.src = m.img;
     img.alt = m.name;
     img.className = "photo";
+ main
 
     const row = document.createElement("div");
     row.className = "title-row";
