@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Rijksmuseum",
+    "city": "Amsterdam",
+    "theme": "Kunst & Geschiedenis",
+    "url": "https://www.rijksmuseum.nl/",
+    "free": false,
+    "kids": true,
+    "temporary": true,
+    "photo": "assets/img/rijksmuseum-1280.jpg",
+    "photoSm": "assets/img/rijksmuseum-640.jpg",
+    "photoLg": "assets/img/rijksmuseum-1920.jpg",
+    "end": "2025-12-31"
+  },
+  {
+    "id": 2,
+    "name": "Van Gogh Museum",
+    "city": "Amsterdam",
+    "theme": "Kunst",
+    "url": "https://www.vangoghmuseum.nl/",
+    "free": false,
+    "kids": true,
+    "temporary": true,
+    "photo": "assets/img/vangogh-1280.jpg",
+    "photoSm": "assets/img/vangogh-640.jpg",
+    "photoLg": "assets/img/vangogh-1920.jpg",
+    "end": "2025-11-15"
+  },
+  {
+    "id": 3,
+    "name": "NEMO Science Museum",
+    "city": "Amsterdam",
+    "theme": "Wetenschap",
+    "url": "https://www.nemosciencemuseum.nl/",
+    "free": false,
+    "kids": true,
+    "temporary": true,
+    "photo": "assets/img/nemo-1280.jpg",
+    "photoSm": "assets/img/nemo-640.jpg",
+    "photoLg": "assets/img/nemo-1920.jpg",
+    "end": "2025-10-30"
+  },
+  {
+    "id": 4,
+    "name": "Kunsthal",
+    "city": "Rotterdam",
+    "theme": "Hedendaagse kunst",
+    "url": "https://www.kunsthal.nl/",
+    "free": false,
+    "kids": true,
+    "temporary": true,
+    "photo": "assets/img/kunsthal-1280.jpg",
+    "photoSm": "assets/img/kunsthal-640.jpg",
+    "photoLg": "assets/img/kunsthal-1920.jpg",
+    "end": "2025-09-30"
+  }
+]
