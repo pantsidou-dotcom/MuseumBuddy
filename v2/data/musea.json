@@ -22,6 +22,7 @@
     "kids": true,
     "temporary": true,
     "photo": "./assets/img/vangogh.jpg",
+    "description": "Iconische schilderijen van Vincent van Gogh en werken van tijdgenoten.",
     "end": "2025-11-15"
   },
   {
