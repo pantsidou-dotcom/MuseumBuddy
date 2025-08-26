@@ -8,9 +8,6 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "assets/img/rijksmuseum.svg",
-    "photoSm": "assets/img/rijksmuseum.svg",
-    "photoLg": "assets/img/rijksmuseum.svg",
     "description": "Schilderijen van Nederlandse meesters zoals Rembrandt en Vermeer.",
     "end": "2025-12-31"
   },
@@ -23,10 +20,6 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "assets/img/van-gogh-museum.svg",
-    "photoSm": "assets/img/van-gogh-museum.svg",
-    "photoLg": "assets/img/van-gogh-museum.svg",
-    "description": "Grootste collectie schilderijen en tekeningen van Vincent van Gogh.",
     "end": "2025-11-15"
   },
   {
