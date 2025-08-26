@@ -22,9 +22,9 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "assets/img/vangogh-1280.jpg",
-    "photoSm": "assets/img/vangogh-640.jpg",
-    "photoLg": "assets/img/vangogh-1920.jpg",
+    "photo": "v2/assets/img/vangoghmuseum-s0016V1962-800.jpg",
+    "photoSm": "v2/assets/img/vangoghmuseum-s0016V1962-800.jpg",
+    "photoLg": "av2/assets/img/vangoghmuseum-s0016V1962-800.jpg",
     "end": "2025-11-15"
   },
   {
