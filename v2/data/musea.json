@@ -8,6 +8,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
+    "photo": "./assets/img/rijksmuseum.png",
     "description": "Schilderijen van Nederlandse meesters zoals Rembrandt en Vermeer.",
     "end": "2025-12-31"
   },
@@ -20,6 +21,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
+    "photo": "./assets/img/vangogh.jpg",
     "end": "2025-11-15"
   },
   {
@@ -31,9 +33,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "https://source.unsplash.com/1280x720/?NEMO%20Science%20Museum",
-    "photoSm": "https://source.unsplash.com/640x360/?NEMO%20Science%20Museum",
-    "photoLg": "https://source.unsplash.com/1920x1080/?NEMO%20Science%20Museum",
+    "photo": "./assets/img/nemo.jpg",
     "description": "Interactieve proefjes en ontdekkingstocht door de wereld van wetenschap.",
     "end": "2025-10-30"
   },
@@ -46,9 +46,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "https://source.unsplash.com/1280x720/?Stedelijk%20Museum",
-    "photoSm": "https://source.unsplash.com/640x360/?Stedelijk%20Museum",
-    "photoLg": "https://source.unsplash.com/1920x1080/?Stedelijk%20Museum",
+    "photo": "./assets/img/stedelijk.jpg",
     "description": "Moderne en hedendaagse kunst en design uit de hele wereld.",
     "end": "2025-09-01"
   },
@@ -61,9 +59,7 @@
     "free": false,
     "kids": true,
     "temporary": false,
-    "photo": "https://source.unsplash.com/1280x720/?Anne%20Frank%20House",
-    "photoSm": "https://source.unsplash.com/640x360/?Anne%20Frank%20House",
-    "photoLg": "https://source.unsplash.com/1920x1080/?Anne%20Frank%20House",
+    "photo": "./assets/img/annefrankhuis.jpg",
     "description": "Het achterhuis waar Anne Frank haar beroemde dagboek schreef.",
     "end": null
   },
@@ -76,9 +72,7 @@
     "free": false,
     "kids": true,
     "temporary": false,
-    "photo": "https://source.unsplash.com/1280x720/?Rembrandt%20House",
-    "photoSm": "https://source.unsplash.com/640x360/?Rembrandt%20House",
-    "photoLg": "https://source.unsplash.com/1920x1080/?Rembrandt%20House",
+    "photo": "./assets/img/rembrandthuis.jpg",
     "description": "Het woonhuis van Rembrandt met etsen, schilderijen en historisch interieur.",
     "end": null
   },
@@ -91,9 +85,7 @@
     "free": true,
     "kids": true,
     "temporary": true,
-    "photo": "https://source.unsplash.com/1280x720/?Eye%20Filmmuseum",
-    "photoSm": "https://source.unsplash.com/640x360/?Eye%20Filmmuseum",
-    "photoLg": "https://source.unsplash.com/1920x1080/?Eye%20Filmmuseum",
+    "photo": "./assets/img/eyefilmmuseum.jpg",
     "description": "Tentoonstellingen over filmgeschiedenis en wisselende filmprogrammering.",
     "end": "2025-08-15"
   },
@@ -106,9 +98,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "https://source.unsplash.com/1280x720/?Tropenmuseum",
-    "photoSm": "https://source.unsplash.com/640x360/?Tropenmuseum",
-    "photoLg": "https://source.unsplash.com/1920x1080/?Tropenmuseum",
+    "photo": "./assets/img/tropenmuseum.jpg",
     "description": "Verhalen en objecten over culturen uit de hele wereld.",
     "end": "2025-07-01"
   },
@@ -121,9 +111,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "https://source.unsplash.com/1280x720/?Moco%20Museum",
-    "photoSm": "https://source.unsplash.com/640x360/?Moco%20Museum",
-    "photoLg": "https://source.unsplash.com/1920x1080/?Moco%20Museum",
+    "photo": "./assets/img/moco.webp",
     "description": "Kleinschalige tentoonstellingen met moderne en hedendaagse kunstenaars.",
     "end": "2025-06-15"
   },
@@ -136,9 +124,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "https://source.unsplash.com/1280x720/?Scheepvaartmuseum",
-    "photoSm": "https://source.unsplash.com/640x360/?Scheepvaartmuseum",
-    "photoLg": "https://source.unsplash.com/1920x1080/?Scheepvaartmuseum",
+    "photo": "./assets/img/scheepvaartmuseum.jpg",
     "description": "Maritieme collecties en een replica van het VOC-schip Amsterdam.",
     "end": "2025-05-30"
   }
