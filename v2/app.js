@@ -158,6 +158,12 @@ function render(){
 
     card.appendChild(figure);
     card.appendChild(titleRow);
+    if (m.description){
+      const desc = document.createElement("p");
+      desc.className = "desc";
+      desc.textContent = m.description;
+      card.appendChild(desc);
+    }
     card.appendChild(badges);
     link.appendChild(card);
     $list.appendChild(link);
