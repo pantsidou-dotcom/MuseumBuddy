@@ -92,14 +92,14 @@
   },
   {
     "id": 8,
-    "name": "Tropenmuseum",
+    "name": "Wereldmuseum Amsterdam",
     "city": "Amsterdam",
     "theme": "Wereldculturen",
-    "url": "https://www.tropenmuseum.nl/",
+    "url": "https://www.wereldmuseum.nl/",
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "./assets/img/tropenmuseum.jpg",
+    "photo": "./assets/img/wereldmuseum-amsterdam.jpg",
     "description": "Verhalen en objecten over culturen uit de hele wereld.",
     "end": "2025-07-01"
   },
