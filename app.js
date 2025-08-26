@@ -272,6 +272,7 @@ function render() {
     img.loading = "lazy";
     img.src = m.img || placeholder(m.name);
     img.alt = m.name;
+    img.referrerPolicy = "no-referrer";
     img.className = "photo";
     img.onerror = () => {
       img.onerror = null;
