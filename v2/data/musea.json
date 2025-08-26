@@ -34,7 +34,7 @@
     "free": false,
     "kids": true,
     "temporary": true,
-    "photo": "./assets/img/nemo.jpg",
+    "photo": "./assets/img/annefrankhuis.jpg",
     "description": "Interactieve proefjes en ontdekkingstocht door de wereld van wetenschap.",
     "end": "2025-10-30"
   },
@@ -60,7 +60,7 @@
     "free": false,
     "kids": true,
     "temporary": false,
-    "photo": "./assets/img/annefrankhuis.jpg",
+    "photo": "./assets/img/nemo.jpg",
     "description": "Het achterhuis waar Anne Frank haar beroemde dagboek schreef.",
     "end": null
   },
