@@ -247,7 +247,7 @@ function placeholder(name) {
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 160'>` +
               `<rect width='400' height='160' fill='#d1d5db'/>` +
               `<text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'` +
-              ` font-family='sans-serif' font-size='20' fill='#6b7280'>${name}</text></svg>`;
+              ` font-family='Quicksand, sans-serif' font-size='20' fill='#6b7280'>${name}</text></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
